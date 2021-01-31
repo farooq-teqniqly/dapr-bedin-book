@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build-weatherapi1",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -14,25 +14,12 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "publish",
+            "label": "build-weatherapi2",
             "command": "dotnet",
             "type": "process",
             "args": [
-                "publish",
-                "${workspaceFolder}/WeatherApi1/WeatherApi1.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "${workspaceFolder}/WeatherApi1/WeatherApi1.csproj",
+                "build",
+                "${workspaceFolder}/WeatherApi2/WeatherApi2.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -41,13 +28,29 @@
         {
             "appId": "weatherapi1",
             "appPort": 5001,
-            "label": "daprd-debug",
+            "httpPort": 5010,
+            "grpcPort": 50010,
+            "label": "daprd-debug-weatherapi1",
             "type": "daprd",
-            "dependsOn": "build"
+            "dependsOn": "build-weatherapi1"
         },
         {
             "appId": "weatherapi1",
-            "label": "daprd-down",
+            "label": "daprd-down-weatherapi1",
+            "type": "daprd-down"
+        },
+        {
+            "appId": "weatherapi2",
+            "appPort": 5002,
+            "httpPort": 5020,
+            "grpcPort": 50020,
+            "label": "daprd-debug-weatherapi2",
+            "type": "daprd",
+            "dependsOn": "build-weatherapi2"
+        },
+        {
+            "appId": "weatherapi2",
+            "label": "daprd-down-weatherapi2",
             "type": "daprd-down"
         }
     ]
